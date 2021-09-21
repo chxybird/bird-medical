@@ -6,13 +6,13 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @Author lipu
- * @Date 2021/9/21 19:57
- * @Description 认证微服务启动类
+ * @Date 2021/9/21 21:09
+ * @Description 微服务网关启动类
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-public class AuthApplication {
+public class GatewayApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AuthApplication.class);
+        SpringApplication.run(GatewayApplication.class);
     }
 }

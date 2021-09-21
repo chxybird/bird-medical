@@ -1,0 +1,49 @@
+server:
+  port: 20000
+
+spring:
+  application:
+    name: bird-gateway
+  cloud:
+    #nacos配置
+    nacos:
+      discovery:
+        #如果是集群搭建，这里配置成Nginx的地址即可或者填写一个集群下多个nacos地址（类似于Eureka集群配置）
+        server-addr: ${virtual.machine.ip}:8848
+      config:
+        max-retry: 10
+
+    #微服务网关配置
+    gateway:
+      #配置从注册中心拉取服务自动配置路由
+      discovery:
+        locator:
+          enabled: true
+      #配置跨域请求
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      routes:
+        - id: SERVICE-AUTH #路由配置的唯一标识
+          uri: lb://service-auth #路由配置 lb表示负载均衡 后面表示微服务的名称
+          predicates:
+            - Path=/medical/auth/** #路由规则配置 路由断言
+          filters:
+            - StripPrefix=2 #将请求路径的前两个路径去除
+
+#虚拟机ip地址
+virtual:
+  machine:
+    ip: 192.168.6.138
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

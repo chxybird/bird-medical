@@ -1,0 +1,24 @@
+server:
+  port: 60000
+
+spring:
+  application:
+    name: service-auth
+  cloud:
+    #nacos配置
+    nacos:
+      discovery:
+        #如果是集群搭建，这里配置成Nginx的地址即可或者填写一个集群下多个nacos地址（类似于Eureka集群配置）
+        server-addr: ${vm.host}:8848
+      config:
+        max-retry: 10
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+vm:
+  host: 192.168.6.138
