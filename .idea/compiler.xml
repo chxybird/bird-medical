@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="bird-api" />
         <module name="bird-gateway" />
-        <module name="bird-service" />
+        <module name="service-log-api" />
+        <module name="service-auth" />
+        <module name="service-log" />
       </profile>
     </annotationProcessing>
   </component>
@@ -19,6 +20,9 @@
       <module name="bird-gateway" options="-parameters" />
       <module name="bird-medical" options="-parameters" />
       <module name="bird-service" options="-parameters" />
+      <module name="service-auth" options="-parameters" />
+      <module name="service-log" options="-parameters" />
+      <module name="service-log-api" options="-parameters" />
     </option>
   </component>
 </project>
