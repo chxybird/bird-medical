@@ -12,5 +12,23 @@
 
     <artifactId>bird-common</artifactId>
 
+    <dependencies>
+        <!--Knife4j+Swagger-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <optional>false</optional>
+        </dependency>
+    </dependencies>
 
 </project>
