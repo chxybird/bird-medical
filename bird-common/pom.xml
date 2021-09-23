@@ -29,6 +29,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <optional>false</optional>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <optional>false</optional>
+        </dependency>
     </dependencies>
 
 </project>
