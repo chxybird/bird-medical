@@ -14,4 +14,4 @@ spring:
     name: bird-gateway
 
 vm:
-  host: 192.168.6.138
+  host: www.bird-medical.com

@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="bird-gateway" />
+        <module name="service-auth-api" />
         <module name="service-log-api" />
         <module name="service-auth" />
         <module name="service-log" />
@@ -22,6 +23,7 @@
       <module name="bird-medical" options="-parameters" />
       <module name="bird-service" options="-parameters" />
       <module name="service-auth" options="-parameters" />
+      <module name="service-auth-api" options="-parameters" />
       <module name="service-log" options="-parameters" />
       <module name="service-log-api" options="-parameters" />
     </option>

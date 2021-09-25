@@ -14,4 +14,4 @@ spring:
     name: service-auth
 
 vm:
-  host: 192.168.6.138
+  host: www.bird-medical.com
