@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @Author lipu
  * @Date 2021/9/22 8:58
- * @Description
+ * @Description 网关集成所有微服务下的每个Swagger
  */
 @Component
 @Primary

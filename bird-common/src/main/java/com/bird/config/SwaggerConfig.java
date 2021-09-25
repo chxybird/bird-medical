@@ -1,7 +1,5 @@
 package com.bird.config;
 
-//import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
-
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
