@@ -27,7 +27,7 @@ CREATE TABLE `t_auth`  (
   `name` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户姓名',
   `age` int(0) NULL DEFAULT NULL COMMENT '年龄',
   `identity` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '身份证',
-  `phone` int(0) NULL DEFAULT NULL COMMENT '电话号码',
+  `phone` bigint(0) NULL DEFAULT NULL COMMENT '电话号码',
   `email` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '电子邮箱',
   `is_open` tinyint(0) NULL DEFAULT 1 COMMENT '1是开启  0否关闭',
   `is_deleted` tinyint(0) NULL DEFAULT 0 COMMENT '是否删除 1是 0否',

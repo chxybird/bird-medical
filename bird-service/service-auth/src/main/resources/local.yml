@@ -12,6 +12,32 @@ spring:
         server-addr: ${vm.host}:8848
       config:
         max-retry: 10
+  #jackson配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss #日期格式化
+    time-zone: GMT+8
+    # 序列化相关
+    serialization:
+      indent_output: true #化输出
+    deserialization:
+      fail_on_unknown_properties: false #反序列化时对象没有json对应的属性忽略
+    defaultPropertyInclusion: NON_EMPTY #如何序列化
+    parser:
+      allow_unquoted_control_chars: true #允许特殊和转义符
+      allow_single_quotes: true #允许单引号
+  #datasource配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${vm.host}:3306/service-auth?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+
+#MP配置
+mybatis-plus:
+  #控制台输出sql语句
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mappers/*.xml
 
 
 management:
