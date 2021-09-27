@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Author lipu
  * @Date 2021/9/25 17:16
@@ -12,7 +14,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel("通用结果集")
-public class CommonResult<T> {
+public class CommonResult<T> implements Serializable {
 
     @ApiModelProperty(value = "状态码", example = "404 200")
     private Integer status;
@@ -22,7 +24,7 @@ public class CommonResult<T> {
     private String message;
 
 
-    public CommonResult<T> success(T data, String message) {
+    public static <T> CommonResult<T> success(T data, String message) {
         CommonResult<T> commonResult = new CommonResult<>();
         commonResult.setData(data);
         commonResult.setStatus(ResultStatusConst.SUCCESS);
@@ -30,7 +32,7 @@ public class CommonResult<T> {
         return commonResult;
     }
 
-    public CommonResult<T> success(T data) {
+    public static <T> CommonResult<T> success(T data) {
         CommonResult<T> commonResult = new CommonResult<>();
         commonResult.setData(data);
         commonResult.setStatus(ResultStatusConst.SUCCESS);

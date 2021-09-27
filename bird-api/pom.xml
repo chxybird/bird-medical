@@ -16,5 +16,20 @@
         <module>service-auth-api</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.1.1</version>
+            <optional>false</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+            <version>3.0.2</version>
+            <optional>false</optional>
+        </dependency>
+    </dependencies>
+
 
 </project>

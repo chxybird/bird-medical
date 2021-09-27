@@ -1,6 +1,10 @@
 server:
   port: 60000
 
+logging:
+  #日志配置文件路径
+  config: classpath:logback-spring.xml
+
 spring:
   application:
     name: service-auth
@@ -34,9 +38,8 @@ spring:
 
 #MP配置
 mybatis-plus:
-  #控制台输出sql语句
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
   mapper-locations: classpath*:mappers/*.xml
 
 
