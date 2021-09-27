@@ -39,4 +39,13 @@ public class CommonResult<T> implements Serializable {
         commonResult.setMessage("请求成功");
         return commonResult;
     }
+
+    public static <T> CommonResult<T> error(T data) {
+        CommonResult<T> commonResult = new CommonResult<>();
+        commonResult.setData(data);
+        commonResult.setStatus(ResultStatusConst.ERROR);
+        commonResult.setMessage("发生异常");
+        return commonResult;
+    }
+
 }

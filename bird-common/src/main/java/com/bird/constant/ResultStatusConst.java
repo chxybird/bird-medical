@@ -11,4 +11,6 @@ public class ResultStatusConst {
      * 响应成功
      */
     public final static Integer SUCCESS = 200;
+
+    public final static Integer ERROR = 500;
 }

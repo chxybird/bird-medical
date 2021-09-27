@@ -39,7 +39,9 @@ spring:
 #MP配置
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    #输出到控制台 推荐
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #  log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl #采用logback的配置输出到文件 不推荐!!!
   mapper-locations: classpath*:mappers/*.xml
 
 
