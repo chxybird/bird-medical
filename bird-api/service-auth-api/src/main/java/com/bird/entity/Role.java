@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -47,6 +48,10 @@ public class Role implements Serializable {
     @ApiModelProperty(value = "修改时间")
     @TableField(fill = FieldFill.UPDATE)
     private Date gmtModified;
+
+    @ApiModelProperty(value = "关联信息-权限信息")
+    @TableField(exist = false)
+    private List<Permission> permissionList;
 
 
 }
