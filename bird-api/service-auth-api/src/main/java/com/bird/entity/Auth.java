@@ -35,6 +35,9 @@ public class Auth implements Serializable {
     @ApiModelProperty(value = "账号")
     private String account;
 
+    @ApiModelProperty(value = "密码")
+    private String password;
+
     @ApiModelProperty(value = "用户姓名")
     private String name;
 

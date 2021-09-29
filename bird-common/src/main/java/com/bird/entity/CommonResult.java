@@ -48,4 +48,11 @@ public class CommonResult<T> implements Serializable {
         return commonResult;
     }
 
+    public static <T> CommonResult<T> unAuthorized() {
+        CommonResult<T> commonResult = new CommonResult<>();
+        commonResult.setStatus(ResultStatusConst.UNAUTHORIZED);
+        commonResult.setMessage("认证失败");
+        return commonResult;
+    }
+
 }

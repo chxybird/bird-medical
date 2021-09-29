@@ -12,5 +12,13 @@ public class ResultStatusConst {
      */
     public final static Integer SUCCESS = 200;
 
+    /**
+     * 响应失败
+     */
     public final static Integer ERROR = 500;
+
+    /**
+     * 认证失败
+     */
+    public final static Integer UNAUTHORIZED = 403;
 }
