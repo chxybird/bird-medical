@@ -6,15 +6,37 @@
 
 
     <!--控制台-->
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="ERROR_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <charset>UTF-8</charset>
             <pattern>%d{MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} %line - %msg%n</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>error</level>
-            <level>warn</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <!--控制台-->
+    <appender name="INFO_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} %line - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>info</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <!--控制台-->
+    <appender name="TRACE_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} %line - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>trace</level>
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
@@ -164,8 +186,9 @@
 
 
     <root level="debug">
-        <appender-ref ref="CONSOLE"/>
-        <!--        <appender-ref ref="DEBUG_FILE"/>-->
+        <appender-ref ref="TRACE_CONSOLE"/>
+        <appender-ref ref="INFO_CONSOLE"/>
+        <appender-ref ref="ERROR_CONSOLE"/>
         <appender-ref ref="INFO_FILE"/>
         <appender-ref ref="WARN_FILE"/>
         <appender-ref ref="ERROR_FILE"/>
