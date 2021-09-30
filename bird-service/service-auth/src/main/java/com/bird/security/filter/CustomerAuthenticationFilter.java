@@ -54,6 +54,7 @@ public class CustomerAuthenticationFilter extends UsernamePasswordAuthentication
             String password = loginBO.getPassword();
             //将获取的用户信息封装并执行authenticationManager.authenticate(),Security会自动调用UserDetailsService
             UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(account, password);
+            this.setDetails(request, authRequest);
             return authenticationManager.authenticate(authRequest);
         } catch (Exception e) {
             //该方法抛出异常会被认证异常处理器进行处理
