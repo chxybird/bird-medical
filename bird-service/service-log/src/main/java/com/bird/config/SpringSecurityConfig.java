@@ -1,13 +1,11 @@
 package com.bird.config;
 
-import com.bird.dao.IAuthDao;
+import com.bird.security.UserDetailsImpl;
 import com.bird.security.filter.CustomerAuthenticationFilter;
-import com.bird.security.filter.CustomerAuthorizationFilter;
 import com.bird.security.handler.CustomerUnAuthenticationHandler;
-import com.bird.service.impl.AuthServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -26,11 +24,15 @@ import javax.annotation.Resource;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
-    private IAuthDao authDao;
-    @Resource
-    private RedisTemplate<String, Object> redisTemplate;
-    @Resource
-    private AuthServiceImpl authService;
+    private UserDetailsImpl userDetails;
+
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
 
     /**
      * @Author lipu
@@ -50,7 +52,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(authService)
+        auth.userDetailsService(userDetails)
                 .passwordEncoder(bCryptPasswordEncoder());
     }
 
@@ -72,9 +74,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().anyRequest().authenticated();
 
         //设置自定义过滤器
-        http
-                .addFilter(new CustomerAuthenticationFilter(super.authenticationManager(), authDao, redisTemplate))
-                .addFilter(new CustomerAuthorizationFilter(super.authenticationManager(), redisTemplate));
+        http.addFilter(new CustomerAuthenticationFilter(super.authenticationManager()));
 
         //禁用Session
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

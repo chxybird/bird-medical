@@ -29,6 +29,12 @@
             <version>3.0.2</version>
             <optional>false</optional>
         </dependency>
+        <!--openFeign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <optional>false</optional>
+        </dependency>
     </dependencies>
 
 

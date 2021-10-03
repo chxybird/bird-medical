@@ -1,5 +1,5 @@
 server:
-  port: 60000
+  port: 61000
 
 logging:
   #日志配置文件路径
@@ -43,7 +43,7 @@ spring:
   #datasource配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${vm.host}:3306/service-auth?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://${vm.host}:3306/service-log?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
     username: root
     password: root
   #Redis配置
@@ -51,15 +51,6 @@ spring:
     host: ${vm.host}
     port: 6379
     database: 15
-
-#MP配置
-mybatis-plus:
-  configuration:
-    #输出到控制台 推荐
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  #  log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl #采用logback的配置输出到文件 不推荐!!!
-  mapper-locations: classpath*:mappers/*.xml
-
 
 management:
   endpoints:

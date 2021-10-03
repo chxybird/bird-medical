@@ -1,8 +1,6 @@
 package com.bird.utils;
 
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 
 import java.util.Base64;
 import java.util.Date;
@@ -68,5 +66,17 @@ public class JwtUtils {
         //令牌解析
         Jwts.parser().setSigningKey(KEY).parseClaimsJws(jwt);
     }
+
+    /**
+     * @Author lipu
+     * @Date 2021/10/2 22:12
+     * @Description 获取令牌的所有者
+     */
+    public static String getSubject(String jwt) {
+        Jws<Claims> claimsJws = Jwts.parser().setSigningKey(KEY).parseClaimsJws(jwt);
+        Claims body = claimsJws.getBody();
+        return body.getSubject();
+    }
+
 
 }

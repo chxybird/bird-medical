@@ -37,6 +37,13 @@ spring:
           filters:
             - StripPrefix=2 #将请求路径的前两个路径去除
 
+
+        - id: SERVICE-LOG #路由配置的唯一标识
+          uri: lb://service-log #路由配置 lb表示负载均衡 后面表示微服务的名称
+          predicates:
+            - Path=/medical/log/** #路由规则配置 路由断言
+          filters:
+            - StripPrefix=2 #将请求路径的前两个路径去除
 #虚拟机ip地址
 virtual:
   machine:
