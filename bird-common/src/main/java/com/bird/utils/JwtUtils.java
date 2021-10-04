@@ -15,7 +15,7 @@ public class JwtUtils {
     /**
      * 认证头部的KEY标识
      */
-    public static final String AUTHORIZATION = "Authorization";
+    public static final String AUTHORIZATION = "Medical";
 
     /**
      * Token有效时间 8小时
@@ -28,7 +28,7 @@ public class JwtUtils {
     /**
      * BASE64编码前的密钥信息
      */
-    public static final String SECRET_KEY = "BIRD";
+    public static final String SECRET_KEY = "Bird";
     /**
      * 最终密钥信息
      */
