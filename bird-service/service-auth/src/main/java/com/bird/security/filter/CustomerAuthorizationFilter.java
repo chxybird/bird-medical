@@ -17,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,18 +55,19 @@ public class CustomerAuthorizationFilter extends BasicAuthenticationFilter {
         String account = JwtUtils.getSubject(jwt);
         //从redis查询用户的认证信息
         Auth auth = (Auth) redisTemplate.opsForValue().get(JwtUtils.SECRET_KEY + ":" + account);
-        List<GrantedAuthority> authorityList = new ArrayList<>();
-        if (auth != null) {
-            List<Role> roleList = auth.getRoleList();
-            authorityList = roleList.stream().map(item -> {
-                return (GrantedAuthority) new SimpleGrantedAuthority(item.getRoleCode());
-            }).collect(Collectors.toList());
-            //构造Security对象
-            UsernamePasswordAuthenticationToken anthRequest = new UsernamePasswordAuthenticationToken(account, null, authorityList);
-            //将对象交给Security来处理
-            SecurityContextHolder.getContext().setAuthentication(anthRequest);
+        if (auth == null) {
             chain.doFilter(request, response);
+            return;
         }
+        List<Role> roleList = auth.getRoleList();
+        List<GrantedAuthority> authorityList = roleList.stream().map(item -> {
+            return (GrantedAuthority) new SimpleGrantedAuthority(item.getRoleCode());
+        }).collect(Collectors.toList());
+        //构造Security对象
+        UsernamePasswordAuthenticationToken anthRequest = new UsernamePasswordAuthenticationToken(account, null, authorityList);
+        //将对象交给Security来处理
+        SecurityContextHolder.getContext().setAuthentication(anthRequest);
         chain.doFilter(request, response);
+
     }
 }
