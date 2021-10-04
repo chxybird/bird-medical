@@ -50,7 +50,7 @@ public class CustomerAuthorizationFilter extends BasicAuthenticationFilter {
             chain.doFilter(request, response);
             return;
         }
-        //验证令牌信息
+        //验证令牌信息0
         JwtUtils.parseJwt(jwt);
         //对用户进行授权
         String account = JwtUtils.getSubject(jwt);
@@ -62,13 +62,12 @@ public class CustomerAuthorizationFilter extends BasicAuthenticationFilter {
             authorityList = roleList.stream().map(item -> {
                 return (GrantedAuthority) new SimpleGrantedAuthority(item.getRoleCode());
             }).collect(Collectors.toList());
+            //构造Security对象
+            UsernamePasswordAuthenticationToken anthRequest = new UsernamePasswordAuthenticationToken(account, null, authorityList);
+            //将对象交给Security来处理
+            SecurityContextHolder.getContext().setAuthentication(anthRequest);
+            chain.doFilter(request, response);
         }
-        //构造Security对象
-        UsernamePasswordAuthenticationToken anthRequest = new UsernamePasswordAuthenticationToken(account, null, authorityList);
-        //将对象交给Security来处理
-        SecurityContextHolder.getContext().setAuthentication(anthRequest);
         chain.doFilter(request, response);
     }
-
-
 }

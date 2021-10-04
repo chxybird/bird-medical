@@ -3,6 +3,8 @@ package com.bird.config;
 import com.bird.dao.IAuthDao;
 import com.bird.security.filter.CustomerAuthenticationFilter;
 import com.bird.security.filter.CustomerAuthorizationFilter;
+import com.bird.security.handler.CustomerLogoutHandler;
+import com.bird.security.handler.CustomerLogoutSuccessHandler;
 import com.bird.security.handler.CustomerUnAuthenticationHandler;
 import com.bird.service.impl.AuthServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -76,6 +78,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new CustomerAuthenticationFilter(super.authenticationManager(), authDao, redisTemplate))
                 .addFilter(new CustomerAuthorizationFilter(super.authenticationManager(), redisTemplate));
 
+        //自定义退出
+        http.logout()
+                .logoutUrl("/security/logout")
+                .addLogoutHandler(new CustomerLogoutHandler(redisTemplate))
+                .logoutSuccessHandler(new CustomerLogoutSuccessHandler());
+
         //禁用Session
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
@@ -97,8 +105,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 , "/swagger-resources/**"
                 , "/doc.html"
                 , "/swagger-ui.html"
-        ).and()
-                //放行OAuth2资源
-                .ignoring().antMatchers("/oauth/**");
+        );
     }
 }
