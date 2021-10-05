@@ -34,7 +34,7 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build();
     }
-    
+
     /**
      * @Author lipu
      * @Date 2021/9/30 14:04

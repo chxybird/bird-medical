@@ -1,11 +1,15 @@
 package com.bird.config;
 
-import com.bird.security.UserDetailsImpl;
+import com.bird.feign.IAuthFeign;
+import com.bird.security.AuthServiceImpl;
 import com.bird.security.filter.CustomerAuthenticationFilter;
+import com.bird.security.filter.CustomerAuthorizationFilter;
+import com.bird.security.handler.CustomerLogoutHandler;
+import com.bird.security.handler.CustomerLogoutSuccessHandler;
 import com.bird.security.handler.CustomerUnAuthenticationHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -24,15 +28,11 @@ import javax.annotation.Resource;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
-    private UserDetailsImpl userDetails;
-
-
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
+    private IAuthFeign authFeign;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
+    @Resource
+    private AuthServiceImpl authService;
 
     /**
      * @Author lipu
@@ -52,7 +52,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetails)
+        auth.userDetailsService(authService)
                 .passwordEncoder(bCryptPasswordEncoder());
     }
 
@@ -74,7 +74,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().anyRequest().authenticated();
 
         //设置自定义过滤器
-        http.addFilter(new CustomerAuthenticationFilter(super.authenticationManager()));
+        http
+                .addFilter(new CustomerAuthenticationFilter(super.authenticationManager(), authFeign, redisTemplate))
+                .addFilter(new CustomerAuthorizationFilter(super.authenticationManager(), redisTemplate));
+
+        //自定义退出
+        http.logout()
+                .logoutUrl("/security/logout")
+                .addLogoutHandler(new CustomerLogoutHandler(redisTemplate))
+                .logoutSuccessHandler(new CustomerLogoutSuccessHandler());
 
         //禁用Session
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -97,8 +105,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 , "/swagger-resources/**"
                 , "/doc.html"
                 , "/swagger-ui.html"
-        ).and()
-                //放行OAuth2资源
-                .ignoring().antMatchers("/oauth/**");
+        );
     }
 }

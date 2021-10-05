@@ -105,6 +105,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 , "/swagger-resources/**"
                 , "/doc.html"
                 , "/swagger-ui.html"
-        );
+        ).and()
+                //放行所有RPC资源
+                .ignoring().antMatchers("/rpc/**");
     }
 }
