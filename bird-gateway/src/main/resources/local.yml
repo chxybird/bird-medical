@@ -9,10 +9,9 @@ spring:
     nacos:
       discovery:
         #如果是集群搭建，这里配置成Nginx的地址即可或者填写一个集群下多个nacos地址（类似于Eureka集群配置）
-        server-addr: ${virtual.machine.ip}:8848
+        server-addr: ${vm.host}:8848
       config:
         max-retry: 10
-
     #微服务网关配置
     gateway:
       #配置从注册中心拉取服务自动配置路由
@@ -45,9 +44,9 @@ spring:
           filters:
             - StripPrefix=2 #将请求路径的前两个路径去除
 #虚拟机ip地址
-virtual:
-  machine:
-    ip: www.bird-medical.com
+vm:
+  host: www.bird-medical.com
+
 
 management:
   endpoints:

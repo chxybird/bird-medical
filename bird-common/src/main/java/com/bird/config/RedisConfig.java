@@ -66,5 +66,5 @@ public class RedisConfig {
         config = config.entryTtl(Duration.ofMinutes(5));
         return config;
     }
-
+    
 }

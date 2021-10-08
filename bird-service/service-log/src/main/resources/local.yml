@@ -51,6 +51,18 @@ spring:
     host: ${vm.host}
     port: 6379
     database: 15
+  #链路追踪配置
+  zipkin:
+    base-url: http://${vm.host}:9411
+    sender:
+      #以http方式想服务提交数据
+      type: web
+  sleuth:
+    sampler:
+      #设置采样比例 默认0.1 设置为1
+      probability: 1
+      #每秒速率
+      rate: 300
 
 management:
   endpoints:

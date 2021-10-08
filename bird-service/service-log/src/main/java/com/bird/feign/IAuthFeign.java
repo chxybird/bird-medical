@@ -44,13 +44,5 @@ public interface IAuthFeign {
     @GetMapping("/get-auth")
     Auth getAuth(@RequestParam("jwt") String jwt);
 
-    /**
-     * rpc测试
-     *
-     * @return 字符串cd
-     */
-    @GetMapping("/test")
-    String testRpc();
-
 
 }

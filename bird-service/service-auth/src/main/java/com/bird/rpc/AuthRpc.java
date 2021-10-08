@@ -61,13 +61,4 @@ public class AuthRpc {
         return JsonUtils.jsonToObject(json, Auth.class);
     }
 
-    /**
-     * @Author lipu
-     * @Date 2021/10/4 17:33
-     * @Description Rpc测试
-     */
-    @GetMapping("/test")
-    public String testRpc() {
-        return "test is success";
-    }
 }
