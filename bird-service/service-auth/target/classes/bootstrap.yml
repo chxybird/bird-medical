@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        #读取的配置文件的类型
+        file-extension: yml
+        #配置管理中心地址
+        server-addr: ${vm.host}:8848
+        #配置管理中心具体的组 不配默认DEFAULT_GROUP
+        group: DEFAULT_GROUP
+        #配置管理中心具体的命名空间 不配置默认public
+        namespace: a2eecd34-f4e9-4fd6-8fab-9f3aff1f2877
+  application:
+    name: service-auth
+
+vm:
+  host: www.bird-medical.com
